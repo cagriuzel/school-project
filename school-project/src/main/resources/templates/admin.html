@@ -8,7 +8,26 @@
 
 	<th:block th:include="fragments/navbar :: navbar"></th:block>
 
-	<div class="container"></div>
+	<div class="container">
+		<table class="table .table-striped">
+			<thead>
+				<tr>
+					<th scope="col">#</th>
+					<th scope="col">Aktif</th>
+					<th scope="col">Ad Soyad</th>
+					<th scope="col">Email</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="demoUser, iStat : ${demoUserList}">
+					<td th:text="${iStat.index + 1}" />
+					<td th:text="${demoUser.active}" />
+					<td th:text="${demoUser.fullname}" />
+					<td th:text="${demoUser.email}" />
+				</tr>
+			</tbody>
+		</table>
+	</div>
 
 
 	<th:block th:include="fragments/scripts :: scripts"></th:block>

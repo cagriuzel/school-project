@@ -24,4 +24,8 @@ public class RoleServiceImp implements RoleService {
 		role.setDescription("Demo üyeler");
 		return roleRepository.save(role);
 	}
+
+	public Optional<Role> findByName(String name) {
+		return roleRepository.findByName("ROLE_DEMO");
+	}
 }

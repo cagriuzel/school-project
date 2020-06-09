@@ -1,6 +1,7 @@
 package com.mmc.kbs.service.model;
 
 import java.io.Serializable;
+import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -50,6 +51,10 @@ public class User implements Serializable {
 	private String password;
 	@Column(name = "ACTIVE")
 	private boolean active;
+	@Column(name = "CREATE_DATE")
+	private LocalDate createDate;
+	@Column(name = "EXPIRE_DATE")
+	private LocalDate expireDate;
 
 	// @formatter:off
 	@JsonIgnore
@@ -170,6 +175,22 @@ public class User implements Serializable {
 
 	public void setRoles(Set<Role> roles) {
 		this.roles = roles;
+	}
+
+	public LocalDate getCreateDate() {
+		return createDate;
+	}
+
+	public void setCreateDate(LocalDate createDate) {
+		this.createDate = createDate;
+	}
+
+	public LocalDate getExpireDate() {
+		return expireDate;
+	}
+
+	public void setExpireDate(LocalDate expireDate) {
+		this.expireDate = expireDate;
 	}
 
 	public Set<Role> addRole(Role role) {

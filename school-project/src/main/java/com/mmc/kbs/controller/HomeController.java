@@ -1,5 +1,7 @@
 package com.mmc.kbs.controller;
 
+import java.util.List;
+
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +13,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 import com.mmc.kbs.request.UserDTO;
 import com.mmc.kbs.service.UserService;
+import com.mmc.kbs.service.exception.RoleNotFoundException;
+import com.mmc.kbs.service.model.User;
 
 @Controller
 public class HomeController {
@@ -28,6 +32,17 @@ public class HomeController {
 	public String login(Model model) {
 		model.addAttribute("userDTO", new UserDTO());
 		return "login";
+	}
+
+	@GetMapping("/admin")
+	public String admin(Model model) {
+		try {
+			List<User> userList = userService.findByRoleName("ROLE_DEMO");
+			model.addAttribute("demoUserList", userList);
+
+		} catch (RoleNotFoundException e) {
+		}
+		return "admin";
 	}
 
 	@PostMapping("/signup")

@@ -1,5 +1,7 @@
 package com.mmc.kbs.service;
 
+import java.time.LocalDate;
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,6 +9,8 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.mmc.kbs.request.UserDTO;
+import com.mmc.kbs.service.exception.RoleNotFoundException;
+import com.mmc.kbs.service.model.Role;
 import com.mmc.kbs.service.model.User;
 import com.mmc.kbs.service.repository.UserRepository;
 
@@ -25,6 +29,11 @@ public class UserServiceImp implements UserService {
 		return userRepository.findByUsername(username);
 	}
 
+	public List<User> findByRoleName(String roleName) throws RoleNotFoundException {
+		Role role = roleService.findByName(roleName).orElseThrow(() -> new RoleNotFoundException(roleName + " not found"));
+		return userRepository.findByRoles(role);
+	}
+
 	@Override
 	public User createMember(UserDTO userDTO) {
 		User user = new User();
@@ -41,6 +50,9 @@ public class UserServiceImp implements UserService {
 		user.setActive(true);
 		user.addRole(roleService.getDemoRole());
 		user.setUsername(userDTO.getSchoolCode());
+		LocalDate now = LocalDate.now();
+		user.setCreateDate(now);
+		user.setExpireDate(now.plusDays(45));
 		return userRepository.save(user);
 	}
 
