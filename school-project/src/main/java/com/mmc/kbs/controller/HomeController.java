@@ -56,7 +56,7 @@ public class HomeController {
 		return ResponseEntity.ok(user);
 	}
 
-	@PostMapping(value = "/admin/user", consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
+	@PostMapping(value = "/admin", consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
 	public String updateUser(UserUpdateDTO modifiedUser, Model model) throws UserNotFoundException, RoleNotFoundException {
 		User updateUser = userService.updateUser(modifiedUser);
 		List<User> userList = userService.findByRoleName("ROLE_DEMO");
