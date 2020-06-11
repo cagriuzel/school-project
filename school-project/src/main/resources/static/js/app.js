@@ -15,6 +15,7 @@
 })();
 $(document).ready(function() {
 	$('input[name*="phone"]').mask('(000) 000 0000');
+	$.fn.datepicker.defaults.language = 'tr';
 
 	$('a.userEdit').click(function(e){
 		var id = $(e.currentTarget).data('id');
