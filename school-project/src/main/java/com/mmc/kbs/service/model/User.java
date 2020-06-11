@@ -16,6 +16,7 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
@@ -53,6 +54,7 @@ public class User implements Serializable {
 	private boolean active;
 	@Column(name = "CREATE_DATE")
 	private LocalDate createDate;
+	@JsonFormat(pattern = "dd/MM/yyyy")
 	@Column(name = "EXPIRE_DATE")
 	private LocalDate expireDate;
 
